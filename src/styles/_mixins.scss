@@ -1,0 +1,100 @@
+@use 'variables' as *;
+
+// Responsive Breakpoints
+@mixin mobile {
+  @media (max-width: 639px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 640px) and (max-width: 1023px) {
+    @content;
+  }
+}
+
+@mixin tablet-up {
+  @media (min-width: 640px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin large-desktop {
+  @media (min-width: 1280px) {
+    @content;
+  }
+}
+
+// Focus ring for accessibility
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid $accent-yellow;
+    outline-offset: 2px;
+  }
+}
+
+// Container wrapper
+@mixin container {
+  width: 100%;
+  max-width: $container-max-width;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $spacing-4;
+  padding-right: $spacing-4;
+
+  @include tablet-up {
+    padding-left: $spacing-6;
+    padding-right: $spacing-6;
+  }
+
+  @include desktop {
+    padding-left: $spacing-8;
+    padding-right: $spacing-8;
+  }
+}
+
+// Surface Card
+@mixin card-surface {
+  background-color: $bg-surface;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+  transition: border-color $transition-fast, background-color $transition-fast, transform $transition-fast;
+
+  &:hover {
+    border-color: $border-light;
+  }
+}
+
+// Modern Scrollbars
+@mixin custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $bg-main;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $border-color;
+    border-radius: $radius-xs;
+
+    &:hover {
+      background: $border-light;
+    }
+  }
+}
+
+// Truncate text
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

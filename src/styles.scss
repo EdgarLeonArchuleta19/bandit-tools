@@ -1,0 +1,279 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+@use 'styles/reset' as *;
+
+// CSS Variables for Minimalist Dark Theme (Default)
+:root {
+  --bg-main: #0D0E0E;
+  --bg-secondary: #141515;
+  --bg-surface: #1A1C1B;
+  --bg-surface-hover: #222523;
+  --bg-surface-active: #2B2E2C;
+  --bg-elevated: #222523;
+
+  --text-primary: #F5F5F3;
+  --text-secondary: #A0A49F;
+  --text-muted: #6E726C;
+  --text-inverse: #0D0E0E;
+
+  --accent-yellow: #FCE300;
+  --accent-yellow-hover: #FFEE33;
+  --accent-yellow-active: #E5CE00;
+  --accent-yellow-subtle: rgba(252, 227, 0, 0.12);
+  --accent-yellow-glow: rgba(252, 227, 0, 0.25);
+
+  --border-color: #252825;
+  --border-light: #343834;
+
+  --code-bg: #090A0A;
+  --preview-bg: #080909;
+}
+
+// CSS Variables for Minimalist Light Theme
+[data-theme="light"] {
+  --bg-main: #F7F8F7;
+  --bg-secondary: #ECEEEB;
+  --bg-surface: #FFFFFF;
+  --bg-surface-hover: #F8F9F8;
+  --bg-surface-active: #E6E8E4;
+  --bg-elevated: #FFFFFF;
+
+  --text-primary: #121412;
+  --text-secondary: #4A4E48;
+  --text-muted: #727670;
+  --text-inverse: #FFFFFF;
+
+  --accent-yellow: #C28B00;
+  --accent-yellow-hover: #A67600;
+  --accent-yellow-active: #8B6300;
+  --accent-yellow-subtle: rgba(194, 139, 0, 0.12);
+  --accent-yellow-glow: rgba(194, 139, 0, 0.25);
+
+  --border-color: #DFE2DC;
+  --border-light: #CFD3CB;
+
+  --code-bg: #F2F4F0;
+  --preview-bg: #E4E7E1;
+}
+
+body {
+  background-color: $bg-main;
+  color: $text-primary;
+  font-family: $font-sans;
+  overflow-x: hidden;
+  transition: background-color $transition-normal, color $transition-normal;
+  @include custom-scrollbar;
+}
+
+::selection {
+  background: $accent-yellow;
+  color: $text-inverse;
+}
+
+// Global Form Controls
+input[type="text"],
+input[type="number"],
+input[type="search"],
+input[type="url"],
+input[type="email"],
+textarea,
+select {
+  background-color: $bg-secondary;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  color: $text-primary;
+  padding: $spacing-2 $spacing-3;
+  font-size: $font-sm;
+  transition: border-color $transition-fast, box-shadow $transition-fast, background-color $transition-fast;
+
+  &::placeholder {
+    color: $text-muted;
+  }
+
+  &:hover {
+    border-color: $border-light;
+  }
+
+  @include focus-ring;
+
+  &:focus {
+    border-color: $accent-yellow;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+// Range Slider with Minimalist Electric feel
+input[type="range"] {
+  appearance: none;
+  -webkit-appearance: none;
+  background: $bg-secondary;
+  border: 1px solid $border-color;
+  border-radius: $radius-full;
+  height: 8px;
+  outline: none;
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: $radius-full;
+    background: $accent-yellow;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+    transition: transform $transition-fast, background-color $transition-fast;
+
+    &:hover {
+      background: $accent-yellow-hover;
+      transform: scale(1.15);
+    }
+  }
+
+  &::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    border: none;
+    border-radius: $radius-full;
+    background: $accent-yellow;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+
+    &:hover {
+      background: $accent-yellow-hover;
+      transform: scale(1.15);
+    }
+  }
+
+  @include focus-ring;
+}
+
+// Buttons
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-2;
+  font-weight: 600;
+  font-size: $font-sm;
+  padding: $spacing-2 $spacing-4;
+  border-radius: $radius-md;
+  min-height: 40px;
+  transition: all $transition-fast;
+  user-select: none;
+  text-decoration: none;
+  white-space: nowrap;
+
+  @include mobile {
+    min-height: 44px;
+  }
+
+  @include focus-ring;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &-primary {
+    background-color: $accent-yellow;
+    color: #0D0E0E;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+
+    &:hover:not(:disabled) {
+      background-color: $accent-yellow-hover;
+      transform: translateY(-1px);
+    }
+
+    &:active:not(:disabled) {
+      background-color: $accent-yellow-active;
+      transform: translateY(0);
+    }
+  }
+
+  &-secondary {
+    background-color: $bg-surface;
+    color: $text-primary;
+    border: 1px solid $border-color;
+
+    &:hover:not(:disabled) {
+      background-color: $bg-surface-hover;
+      border-color: $border-light;
+      color: $text-primary;
+    }
+
+    &:active:not(:disabled) {
+      background-color: $bg-surface-active;
+    }
+  }
+
+  &-ghost {
+    background-color: transparent;
+    color: $text-secondary;
+
+    &:hover:not(:disabled) {
+      color: $text-primary;
+      background-color: rgba(128, 128, 128, 0.08);
+    }
+  }
+
+  &-danger {
+    background-color: $color-error-bg;
+    color: $color-error;
+    border: 1px solid rgba(248, 113, 113, 0.3);
+
+    &:hover:not(:disabled) {
+      background-color: rgba(248, 113, 113, 0.2);
+    }
+  }
+
+  &-lg {
+    padding: $spacing-3 $spacing-5;
+    font-size: $font-base;
+  }
+
+  &-sm {
+    padding: $spacing-1 $spacing-3;
+    font-size: $font-xs;
+  }
+
+  &-icon {
+    padding: $spacing-2;
+    border-radius: $radius-md;
+  }
+}
+
+// Utility Classes
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.text-accent {
+  color: $accent-yellow;
+}
+
+.text-muted {
+  color: $text-muted;
+}
+
+.text-secondary {
+  color: $text-secondary;
+}
+
+.mono {
+  font-family: $font-mono;
+}

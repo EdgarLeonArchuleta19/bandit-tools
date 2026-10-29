@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Minimalist Flat Charcoal Squircle Background -->
+  <rect width="100" height="100" rx="20" fill="#0D0E0E"/>
+  <rect x="1.5" y="1.5" width="97" height="97" rx="18.5" stroke="#252825" stroke-width="1.5"/>
+
+  <!-- Classic Sharp Flat Lightning Bolt -->
+  <path d="M 56 16 L 34 50 L 50 50 L 40 84 L 68 46 L 52 46 Z" fill="#FFD43B"/>
+</svg>
